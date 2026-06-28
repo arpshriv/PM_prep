@@ -1,0 +1,585 @@
+# Role & Domain Deep Dive — Study Notes
+
+## How to Use This Document
+Read section by section. After each section, close the doc and try to explain it from memory. If you can't, re-read. The interview tests whether you UNDERSTAND this space, not whether you memorized facts.
+
+---
+
+# PART 1: THE COMPANY CONTEXT
+
+## Google Cloud — The Business
+
+Google Cloud is Google's enterprise cloud computing division. Think of it in 3 pieces:
+
+**Google Cloud Platform (GCP)** — Infrastructure + platform services
+- Compute (VMs, Kubernetes, serverless)
+- Storage (Cloud Storage, BigQuery, databases)
+- AI/ML (Vertex AI, Gemini)
+- Networking, security, IoT
+
+**Google Workspace** — Productivity suite
+- Gmail, Docs, Sheets, Slides, Meet, Chat
+- Enterprise collaboration tools
+
+**Google Cloud Business** — The business operations that SELL and SUPPORT all of the above
+- Sales teams closing deals
+- Marketing generating leads
+- Finance tracking revenue
+- Support keeping customers happy
+- Product teams building features
+
+**Key numbers to know:**
+- Google Cloud revenue: ~$41B annually (2024), growing ~25% YoY
+- Google Cloud has 200+ countries with customers
+- Cloud is Google's fastest-growing major business segment
+- Sundar Pichai (CEO) has repeatedly called Cloud a top priority
+- Thomas Kurian runs Google Cloud
+
+**Why this matters for the interview:** UDL serves the THIRD piece — the business operations of Google Cloud. Your product doesn't serve external customers directly. It serves the Googlers who sell to, market to, support, and build for those customers. Every inefficiency in their data = slower sales cycles, wrong forecasts, wasted marketing spend, missed churn signals.
+
+---
+
+## GCBP — Google Cloud Business Platform
+
+### What It Is
+
+GCBP is the **internal business operations platform** for Google Cloud. If Google Cloud were a car, GCBP would be the dashboard, gauges, and GPS — not the engine.
+
+### What It Does
+
+GCBP manages the systems and data that power Google Cloud's business operations:
+
+```
+GCBP
+├── CRM (Customer Relationship Management)
+│   ├── Account management (who are our customers?)
+│   ├── Opportunity tracking (what deals are in progress?)
+│   ├── Contact management (who are the decision-makers?)
+│   └── Activity tracking (what conversations happened?)
+│
+├── Revenue Systems
+│   ├── Billing (what did customers consume? what do we charge?)
+│   ├── Invoicing (send the bill)
+│   ├── Revenue recognition (when can we count it as revenue?)
+│   └── Forecasting (what will revenue be next quarter?)
+│
+├── Marketing Systems
+│   ├── Campaign management (what marketing programs are running?)
+│   ├── Lead management (who showed interest?)
+│   ├── Attribution (which marketing touchpoint drove the deal?)
+│   └── ROI tracking (is marketing spend working?)
+│
+├── Customer Success Systems
+│   ├── Product usage tracking (are customers using what they bought?)
+│   ├── Health scoring (are customers happy or at risk?)
+│   ├── Renewal management (when do contracts expire?)
+│   └── Expansion tracking (are customers buying more?)
+│
+└── Business Intelligence
+    ├── Dashboards (how is the business doing?)
+    ├── Reports (quarterly business reviews)
+    ├── Analytics (deep dives on specific questions)
+    └── Data Products ← THIS IS WHERE UDL SITS
+```
+
+### Why GCBP Exists
+
+Google famously built most of its consumer products (Search, Maps, YouTube) with relatively little traditional business operations. But Cloud is different:
+
+- Cloud is a **B2B enterprise sales business** — it requires sales teams, account managers, solution architects, support engineers
+- Enterprise customers have **multi-year contracts** worth millions — they expect relationship management
+- Cloud revenue is a mix of **consumption** (pay-as-you-go) and **commitment** (reserved capacity) — complex billing
+- Google competes against AWS and Azure who have **decades** of enterprise sales maturity
+
+GCBP is Google's answer to building the operational muscle that enterprise sales requires.
+
+---
+
+# PART 2: UDL — THE TEAM YOU'D JOIN
+
+## The Mission (from the JD, word for word)
+
+> "Create a GCBP-supported, consolidated, and connected source of truth that is of high quality, accurate and reliable, for all of Cloud's business data and metrics, enabling both operational and analytics CUJs."
+
+### Breaking This Down Word by Word
+
+| Word/Phrase | What It Means |
+|------------|---------------|
+| **GCBP-supported** | Built on top of GCBP's infrastructure, not a side project |
+| **consolidated** | One place, not scattered across 15 systems |
+| **connected** | Data from different sources is linked (a customer in CRM = same customer in billing = same customer in usage) |
+| **source of truth** | THE canonical answer — when numbers conflict, this one wins |
+| **high quality** | Complete, accurate, no missing fields or wrong values |
+| **accurate** | Matches reality — revenue in the system = revenue in the bank |
+| **reliable** | Available when you need it, fresh enough to be useful |
+| **all of Cloud's business data and metrics** | Not just Sales data or just Finance data — ALL of it |
+| **operational CUJs** | Real-time workflows: "sales rep checks if the deal closed" |
+| **analytics CUJs** | Retrospective analysis: "finance analyzes Q3 revenue trends" |
+
+## The Problem UDL Solves
+
+### Before UDL (The Pain)
+
+Imagine you're a Sales VP at Google Cloud. You want to know: "How much pipeline do I have for Q4?"
+
+**What happens today without UDL:**
+
+1. You open Dashboard A (built by your regional analytics team) → says $500M
+2. Your boss opens Dashboard B (built by the central FP&A team) → says $480M
+3. Finance opens Dashboard C (their own report) → says $520M
+
+**Why are they different?**
+- Dashboard A includes partner-influenced deals; B and C don't
+- Dashboard B uses "weighted pipeline" (multiplied by probability); A uses raw
+- Dashboard C includes deals that are "committed" but not yet in the CRM
+- A refreshes hourly; B refreshes daily; C refreshes weekly
+- A defines "Q4" as calendar quarter; C defines it as Google's fiscal quarter
+
+**Result:** You spend 2 hours in a meeting arguing about which number is right instead of talking about how to close more deals.
+
+**This happens for EVERY metric:** Revenue, churn, customer count, ARR, pipeline, lead conversion, marketing ROI, product adoption, support tickets.
+
+### After UDL (The Vision)
+
+1. ONE dashboard with ONE number for pipeline: $495M
+2. Hover over it → shows the definition: "Weighted pipeline, all sources including partner, Google fiscal Q4, refreshed hourly"
+3. Click → drills down by region, product, sales team, deal stage
+4. The VP, the boss, and Finance ALL see $495M because they're all pulling from the same SOT
+
+**That's it. That's the product. It sounds simple but it's incredibly hard to build.**
+
+## Why It's Hard
+
+### Problem 1: Definition Alignment
+"What is a customer?" sounds simple. It's not.
+- Sales says: "an account with at least one active opportunity"
+- Finance says: "an entity with a signed contract generating revenue"
+- Support says: "anyone who has opened a support ticket"
+- Product says: "any organization with active GCP usage"
+
+These are ALL reasonable definitions. UDL has to pick ONE canonical definition for each use case, or create a hierarchy where each definition is explicitly labeled.
+
+### Problem 2: Data Freshness vs Accuracy Trade-off
+- Sales needs REAL-TIME pipeline data (the deal just closed!)
+- Finance needs ACCURATE revenue data (every penny must reconcile to the bank)
+- Real-time data is often messy; accurate data takes time to reconcile
+- UDL must serve both from the SAME underlying source
+
+### Problem 3: Scale
+- Google Cloud has thousands of sales reps across 200+ countries
+- Millions of customers, billions of billing events
+- Hundreds of products with different pricing models
+- Multiple currencies, tax jurisdictions, contract structures
+- The data volume is enormous
+
+### Problem 4: Migration Pain
+- Existing dashboards and reports are built on legacy data
+- Migrating to UDL means changing numbers that people have been reporting for years
+- "But my dashboard has always said $500M!" — even if that number was wrong
+- Change management is as important as the technology
+
+### Problem 5: Trust
+- Once you publish a "source of truth" and it's wrong ONCE, you lose trust
+- Rebuilding trust takes 10x longer than losing it
+- UDL needs robust data quality monitoring, alerting, and SLAs
+
+---
+
+# PART 3: THE USERS — DEEP PROFILES
+
+## User 1: Sales
+
+### Who They Are
+- Account Executives (AEs) — close deals
+- Sales Development Reps (SDRs) — qualify leads
+- Sales Managers — manage teams, forecast pipeline
+- Sales VPs — strategic decisions, territory planning
+- Solution Architects — technical pre-sales support
+
+### Their Daily Life
+- Morning: Check pipeline dashboard — any deals moved? Any at risk?
+- Throughout day: Update CRM with meeting notes, deal status
+- Weekly: Pipeline review with manager — "what's closing this quarter?"
+- Monthly: Territory planning — "where should we focus?"
+- Quarterly: Forecast submission — "I commit to $XM this quarter"
+
+### What They Need from UDL
+1. **Accurate pipeline** — total value, by stage, by probability
+2. **Deal velocity** — how long are deals taking to close? Getting faster or slower?
+3. **Win/loss analysis** — why did we win? Why did we lose? To whom?
+4. **Quota attainment** — am I on track? Is my team on track?
+5. **Account health** — which existing customers are at risk of churning?
+
+### Their Pain Points (in their words)
+- "I update Salesforce religiously but the dashboard doesn't match what I entered"
+- "My manager's pipeline report shows different numbers than mine"
+- "I can't tell which of my accounts are actually using what they bought"
+- "Forecasting is a guessing game — I just negotiate with my manager"
+- "I spend Friday afternoons reconciling pipeline numbers instead of selling"
+
+### Roopali's Connection
+At RingCentral, she built exactly this — subscription analytics for the Global Sales Organization. Her "3 conflicting definitions of Churn" story IS the pipeline number discrepancy problem.
+
+---
+
+## User 2: Finance
+
+### Who They Are
+- FP&A analysts — financial planning and analysis
+- Revenue accountants — revenue recognition
+- Controllers — financial controls and compliance
+- CFO office — strategic financial decisions
+
+### Their Daily Life
+- Daily: Monitor revenue, billing, collections
+- Weekly: Revenue flash reports — "how did this week compare to last?"
+- Monthly: Close the books — reconcile every dollar
+- Quarterly: 10-Q filing, board reporting, earnings call preparation
+- Annually: Planning, budgeting, audit preparation
+
+### What They Need from UDL
+1. **Revenue SOT** — one number that matches what goes in the 10-Q
+2. **Forecast accuracy** — how close were our predictions to actual?
+3. **Billing reconciliation** — usage ↔ billing ↔ revenue must all tie
+4. **Segmentation** — revenue by product, region, customer type, contract type
+5. **Compliance** — ASC 606 revenue recognition requires precise data
+
+### Their Pain Points
+- "We spend 2 weeks every quarter reconciling numbers before the earnings call"
+- "Sales reports one pipeline number, we have a different one, the board sees a third"
+- "I can't get usage data at the granularity I need for revenue recognition"
+- "Consumption revenue is unpredictable — I need better forecasting inputs"
+- "I need to know the dollar-weighted average contract length and I have to pull from 3 systems"
+
+### Roopali's Connection
+At Cisco, she built revenue forecasting models for Success Track Services. The Finance → Sales reconciliation problem is the same.
+
+---
+
+## User 3: Marketing
+
+### Who They Are
+- Demand Generation — create leads through campaigns
+- Field Marketing — support sales in specific regions/verticals
+- Product Marketing — position products in market
+- Marketing Operations — track funnel, attribution, ROI
+- CMO office — strategic marketing decisions
+
+### What They Need from UDL
+1. **Marketing attribution** — which campaign/channel drove which deal?
+2. **Funnel metrics** — lead → MQL → SQL → opportunity → closed conversion rates
+3. **Campaign ROI** — $X spent on this event → $Y in pipeline generated
+4. **Lead quality** — are the leads Marketing passes to Sales actually converting?
+5. **Customer acquisition cost (CAC)** — fully loaded cost to acquire a customer
+
+### Their Pain Points
+- "I can't prove that my $2M conference sponsorship generated any pipeline"
+- "Sales says our leads are garbage; I say their follow-up is slow. Neither of us has the data to prove it."
+- "Multi-touch attribution is a black box — I don't know which touchpoint mattered"
+- "By the time I get campaign performance data, the campaign is over"
+- "Every team defines 'MQL' differently"
+
+### Roopali's Connection
+Lead-to-Cash flow starts with Marketing. Her understanding of funnel metrics from RingCentral (pipeline expansion, lead conversion) maps directly.
+
+---
+
+## User 4: Product
+
+### Who They Are
+- Product Managers — define what to build
+- Product Analysts — analyze usage, adoption, retention
+- Engineering Directors — resource allocation decisions
+- VP of Product — portfolio strategy
+
+### What They Need from UDL
+1. **Product usage** — which features are customers actually using?
+2. **Adoption curves** — how quickly do new customers ramp up?
+3. **Retention/churn signals** — usage drops that predict churn
+4. **Feature impact** — did the feature we launched last quarter move any business metric?
+5. **Competitive intelligence** — where are we winning vs AWS/Azure and why?
+
+### Their Pain Points
+- "Usage data is in one system, revenue data is in another — I can't correlate them"
+- "I don't know if my feature drove the retention improvement or if it was the sales team's effort"
+- "I need to know which product usage patterns predict upsell, but the data doesn't exist in one place"
+
+---
+
+## User 5: Support / Customer Success
+
+### Who They Are
+- Customer Success Managers (CSMs) — ensure customers get value
+- Technical Account Managers (TAMs) — technical relationship management
+- Support Engineers — resolve technical issues
+- Support Managers — team performance, SLA compliance
+
+### What They Need from UDL
+1. **Customer health score** — composite of usage, support tickets, NPS, contract status
+2. **Escalation patterns** — which customers are escalating more frequently?
+3. **Time to value** — how long from contract signing to first meaningful usage?
+4. **Renewal risk** — which contracts expiring this quarter are at risk?
+5. **Support cost** — cost-to-serve per customer vs revenue
+
+### Their Pain Points
+- "I manage 50 accounts but have no single view of which ones are healthy vs at risk"
+- "I found out a customer was unhappy when they didn't renew — there were no warning signs in my data"
+- "Usage data comes from the Product team, contract data from Finance, support tickets from Zendesk — I toggle between 4 tabs"
+
+### Roopali's Connection
+This is her Palo Alto Networks story. She built the exact customer health KPI framework — churn risk, adoption rates, deployment efficiency, time-to-value.
+
+---
+
+# PART 4: LEAD-TO-CASH — THE BUSINESS PROCESS
+
+## The Full Lifecycle
+
+```
+MARKETING                    SALES                         FINANCE
+────────                    ─────                         ───────
+Campaign                    
+  ↓                         
+Lead                        
+  ↓                         
+MQL (Marketing              
+Qualified Lead)              
+  ↓                         
+SQL (Sales ─────────────→  Accepts lead
+Qualified Lead)               ↓
+                            Opportunity created
+                              ↓
+                            Discovery calls
+                              ↓
+                            Solution design
+                              ↓
+                            Proposal / Quote
+                              ↓
+                            Negotiation
+                              ↓
+                            Closed Won ──────────────→  Contract signed
+                                                          ↓
+                                                        Billing starts
+                                                          ↓
+                                                        Usage tracking
+                                                          ↓
+                                                        Invoice generated
+                                                          ↓
+                                                        Payment received
+                                                          ↓
+                                                        Revenue recognized
+                                                          ↓
+                            ←──────────────────────── Renewal / Expansion
+```
+
+## Data Challenges at Each Stage
+
+### Stage: Lead → MQL
+**Data challenge:** Attribution. The lead came from Google.com, then attended a webinar, then clicked an email, then talked to a sales rep at a conference. Which touchpoint gets credit?
+
+**UDL's role:** SOT for lead source and attribution model. One canonical answer to "where did this lead come from?"
+
+### Stage: MQL → SQL
+**Data challenge:** Definition. What makes a lead "qualified"? Marketing says "they downloaded a whitepaper." Sales says "they have budget, authority, need, and timeline (BANT)." These are very different bars.
+
+**UDL's role:** SOT for qualification criteria and conversion metrics. One definition of MQL → SQL conversion rate.
+
+### Stage: SQL → Opportunity
+**Data challenge:** Pipeline integrity. Sales reps create opportunities optimistically. Some are real; some are "happy ears." The pipeline is inflated. Finance discounts it; Sales doesn't.
+
+**UDL's role:** SOT for pipeline value with consistent weighting methodology.
+
+### Stage: Opportunity → Closed Won
+**Data challenge:** Forecasting. "I'm 80% confident this $2M deal closes in Q4." But historically, deals at 80% confidence close only 45% of the time. The forecast is a lie.
+
+**UDL's role:** SOT for historical close rates by segment, size, region — so forecasts are data-driven, not gut-driven.
+
+### Stage: Closed Won → Billing
+**Data challenge:** Contract complexity. A deal might have:
+- A 3-year commit with annual step-ups
+- A consumption component (pay for what you use)
+- A discount schedule that changes in year 2
+- Multiple products bundled at different prices
+
+**UDL's role:** SOT for contract terms, connecting the deal in CRM to the billing system.
+
+### Stage: Billing → Revenue
+**Data challenge:** Revenue recognition (ASC 606). You can't count revenue the moment a contract is signed. Revenue is recognized as the service is delivered. For a 3-year contract, revenue is spread across 36 months. For consumption, revenue is recognized when used.
+
+**UDL's role:** SOT for recognized revenue, deferred revenue, and bookings — three different numbers that must all be tracked.
+
+### Stage: Revenue → Renewal
+**Data challenge:** Churn prediction. The renewal is 11 months away. What signals NOW predict whether the customer will renew? Usage patterns? Support tickets? NPS scores? Executive sponsor left?
+
+**UDL's role:** SOT that connects usage, support, and contract data into a predictive health score.
+
+---
+
+# PART 5: THE DATA PRODUCT LANDSCAPE
+
+## What UDL Likely Builds (Product Categories)
+
+### Category 1: Data Models (Schemas)
+The canonical definition of every business entity:
+
+| Entity | Definition | Sources |
+|--------|-----------|---------|
+| Customer | An organization with an active GCP billing account | CRM + Billing |
+| Opportunity | A potential deal with >10% probability | CRM |
+| Revenue | ASC 606 recognized revenue | Billing + Finance |
+| ARR | Annual recurring revenue from committed contracts | Billing + CRM |
+| Pipeline | Sum of weighted opportunity values | CRM |
+| Churn | Customer with >90 day usage gap or non-renewed contract | Billing + Usage |
+| MQL | Lead meeting campaign-specific engagement threshold | Marketing automation |
+
+**Why this is a product, not a technical exercise:** These definitions are BUSINESS DECISIONS. The PM doesn't just write a schema — they facilitate agreement across Sales, Finance, Marketing, and Product on what each term means. Then they encode it in data.
+
+### Category 2: Data Pipelines
+The infrastructure that moves data from source to SOT:
+
+```
+Source Systems → Extract → Transform → Load → SOT → Serve
+(CRM, Billing,    (APIs,    (Clean,     (Write   (BigQuery/    (Dashboards,
+ Usage, Marketing  Events,   Dedupe,     to       Warehouse)     APIs,
+ Automation)       Files)    Enrich,     target)                 Reports)
+                            Join)
+```
+
+**PM decisions in pipelines:**
+- Freshness SLA: how often should each pipeline refresh? (hourly? daily? real-time?)
+- Error handling: what happens when a source is down? Serve stale data or show "unavailable"?
+- Schema evolution: a source system adds a new field — how does it flow through?
+- Cost: running pipelines at Google scale costs real money. Priority = budget.
+
+### Category 3: Data Quality Framework
+Monitoring and alerting to ensure SOTs stay trustworthy:
+
+| Check Type | What It Catches | Example |
+|-----------|----------------|---------|
+| Freshness | Data is stale | Pipeline didn't run — data is 18 hours old |
+| Completeness | Data is missing | 30% of opportunities missing "close date" |
+| Accuracy | Data is wrong | Revenue sum doesn't match Finance's number |
+| Consistency | Data contradicts itself | Customer marked "churned" but has usage this month |
+| Volume | Data volume anomaly | 50% fewer leads this week — pipeline broke or real? |
+
+**PM decisions in data quality:**
+- What SLA per SOT? (99.9% freshness? 100% accuracy?)
+- Who gets alerted? (Data team? Or also the users?)
+- Auto-remediation: can the system fix known issues automatically?
+- Transparency: should users SEE the data quality score on every dashboard?
+
+### Category 4: Self-Service Analytics
+Making data accessible to non-technical users:
+
+| Tool Type | Who Uses It | Example |
+|-----------|------------|---------|
+| Dashboards (Looker) | Executives, managers | "Q4 pipeline by region" |
+| SQL interface | Analysts | "Custom query on opportunity data" |
+| APIs | Engineering teams | "Feed pipeline data into internal tool" |
+| Natural language query | Everyone | "Hey, what's our churn rate in EMEA?" |
+| Data catalog | Anyone looking for data | "Where is the customer health dataset?" |
+
+### Category 5: Data Discovery & Catalog
+Helping users FIND the right data:
+
+**The discovery problem:** Google Cloud has hundreds of datasets. A new Googler joins and needs to answer "how many customers do we have?" They don't know:
+- Which dataset to use
+- Whether it's trustworthy
+- How fresh it is
+- What the definition of "customer" is in that dataset
+- Whether there's a better dataset somewhere else
+
+**The catalog solution:** A searchable, annotated directory of all datasets with:
+- Description (what is this data?)
+- Owner (who maintains it?)
+- Freshness (when was it last updated?)
+- Quality score (how trustworthy?)
+- Usage stats (how many people use this? — social proof)
+- Lineage (where did this data come from? how was it transformed?)
+- Sample queries (how do I use it?)
+
+---
+
+# PART 6: GOOGLE'S INTERNAL DATA TECHNOLOGIES
+
+## Technologies to Mention (Show Technical Awareness)
+
+| Technology | What It Is | How to Mention It |
+|-----------|-----------|-------------------|
+| **BigQuery** | Google's serverless data warehouse | "I'd expect the SOTs live in BigQuery with Looker on top" |
+| **Looker** | Google's BI platform (acquired 2019) | "Self-service dashboards for non-technical users" |
+| **Dataplex** | Data governance and management | "Data catalog and quality monitoring" |
+| **Dataflow** | Stream and batch data processing | "Real-time pipeline processing" |
+| **Pub/Sub** | Event streaming / messaging | "Real-time event ingestion from source systems" |
+| **Dremel / Mesa** | Google's internal query engine / data store | "For internal-scale data processing" |
+| **LookML** | Looker's semantic modeling language | "The semantic layer that translates raw data to business metrics" |
+| **Gemini** | Google's AI | "AI-powered data discovery — 'ask the data a question in natural language'" |
+
+**Don't over-index on technology.** The HM cares that you understand the PROBLEM, not that you know Google's tech stack. Mention 2-3 technologies naturally. Don't list them.
+
+---
+
+# PART 7: COMPETITIVE CONTEXT
+
+## Why Competitive Context Matters for an Internal Product
+
+Even though UDL is internal, the HM might ask "how would you think about this compared to what's available externally?" This shows you understand the broader market.
+
+## The Landscape
+
+### Salesforce Data Cloud
+- Customer 360 vision — one unified view of every customer
+- Similar ambition to UDL but for external enterprises
+- **Relevant insight:** "Salesforce solved the SOT problem for CRM data. UDL is solving it for ALL business data, not just CRM."
+
+### Snowflake
+- Data warehouse + data sharing + marketplace
+- Key innovation: separate compute from storage (scale each independently)
+- **Relevant insight:** "Snowflake showed that a data warehouse alone isn't enough — you need governance, sharing, and marketplace on top."
+
+### dbt (data build tool)
+- Transforms raw data into clean, modeled tables using SQL
+- "Analytics engineering" as a discipline
+- **Relevant insight:** "dbt proved that data transformation should be version-controlled and tested like software code."
+
+### Atlan / Alation / DataHub
+- Data catalogs — help users find and understand data
+- **Relevant insight:** "The discovery problem is as important as the quality problem — the best SOT in the world is useless if nobody can find it."
+
+### Segment / mParticle (CDPs)
+- Customer Data Platforms — collect, unify, and route customer data
+- **Relevant insight:** "CDPs solve customer identity resolution — making sure 'John at Acme' in CRM is the same 'john@acme.com' in billing. UDL faces the same challenge at Google scale."
+
+---
+
+# PART 8: WHAT TO REMEMBER — FLASH CARDS
+
+## Card 1: What is GCBP?
+Google Cloud's internal business operations platform — the CRM, billing, marketing, support, and analytics systems that run Google Cloud's business.
+
+## Card 2: What is UDL?
+A team within GCBP that builds the single source of truth for ALL Cloud business data and metrics. One canonical number for every metric, trusted by Sales, Finance, Marketing, Product, and Support.
+
+## Card 3: What is the core problem?
+Data fragmentation — different teams use different definitions, different dashboards, different data sources. Nobody trusts the numbers. Time is wasted on reconciliation instead of decisions.
+
+## Card 4: What is Lead-to-Cash?
+The business lifecycle: Lead → MQL → SQL → Opportunity → Proposal → Negotiation → Closed Won → Billing → Revenue → Renewal. Data quality issues cascade downstream.
+
+## Card 5: What does UDL build?
+Five things: (1) canonical data models (definitions), (2) data pipelines (freshness), (3) data quality frameworks (trust), (4) self-service analytics (access), (5) data discovery/catalog (findability).
+
+## Card 6: Who are the users?
+Sales (pipeline, quota), Finance (revenue, forecasting), Marketing (attribution, ROI), Product (usage, adoption), Support/CS (health scores, churn risk), PMs (cross-functional metrics).
+
+## Card 7: Why is it hard?
+Definition alignment (everyone defines "customer" differently), freshness vs accuracy trade-off, Google-scale data volume, migration pain from legacy, and trust (one wrong number kills trust).
+
+## Card 8: What's Roopali's connection?
+"I've built UDL before — subscription SOT at RingCentral, customer health KPIs at Palo Alto, revenue forecasting at Cisco, data warehouse at Brocade. Same problem, same users, Google scale."
+
+## Card 9: Key technologies
+BigQuery (warehouse), Looker (dashboards), Dataplex (catalog/governance), LookML (semantic layer). Don't lead with tech — lead with the user problem.
+
+## Card 10: Questions to ask HM
+"What's the biggest trust gap today — freshness, accuracy, or discoverability?" Shows you understand the three dimensions of data trust.
