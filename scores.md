@@ -45,16 +45,37 @@ Overall: Solid Pass
 Key feedback: 5-way ecosystem (including music rights holders) is best ecosystem analysis yet. NSM well-constructed (completion-based, per-user, weekly, search-specific). "Repeat searches in same session" guardrail is brilliant frustration signal. Cannibalization guardrail (Shorts vs LF) shows YouTube Ads awareness. Bias connected to NSM mechanism (popular creators inflate CTR but hurt NSM). STILL no explicit goal statement (5th answer in a row). Only 1 bias (need 2-3) — missed video length normalization on 70% threshold (same bias from podcasting Q, should catch it by now) and recency bias. Didn't distinguish search results PAGE specifically from search in general. Ecosystem metric too generic. Missing strategic insight: search captures high-intent users (15-20% of video starts) with higher CPM value. See `examples/solved-analytical.md` Q3.
 ---
 
-## 2026-06-27 — Google — Strategy — YouTube CTV Advertising Strategy
-Question: "You're a PM on YouTube Ads. CTV ad spend is growing faster than any format, and Amazon, Roku, and Netflix are all building out CTV ad businesses. What should YouTube's strategy be to win in CTV advertising over the next 2-3 years?"
-Score: Thesis Clarity: 3/4, Market Knowledge: 3.5/4, Trade-off Reasoning: 2.5/4, Google/YT Fit: 3/4, Sizing: 1.5/4
-Overall: Solid Pass
-Key feedback: First Strategy round (0 prior reps) — strong baseline. Thesis landed after coaching on "lead with position" ("close x-surface attribution gap to improve advertiser ROAS"), specific and falsifiable. Market knowledge strongest dimension — named DV360, GPay/Shopping mechanics, 90%+ unmeasurable CTV brand-ad stat, accurate competitor positioning. Reconsideration signal (MMM/advertiser budget split showing CTV used for brand-only, not down-funnel) was excellent — falsifiable and ties straight back to thesis. Two real gaps: (1) final prioritization called Solution 2 (ML targeting) "the moat no competitor can match" — contradicts own SW analysis, which established x-surface attribution (not targeting) as the actual differentiator vs. Amazon/Roku/Netflix; re-derive sequencing from the moat analysis, not from speed-to-ship. (2) Sizing never appeared anywhere in the exercise, even after being flagged explicitly mid-round — no TAM, no beachhead vertical, no revenue estimate. Needs to become a default habit before closing any Strategy answer.
+## 2026-06-26 — Google — Interview Debrief — YT Uploaders Metric Diagnosis (actual interview)
+Question: "You are a PM for YT uploads and daily unique uploaders has not been growing as fast as it used to be. How would you find out what's going on?"
+Score: Clarify: 3/4, Hypothesize: 3/4, Funnel: 2.5/4, Attribute: 2/4, Action Plan: 3.5/4, Systemic Signal: 2/4
+Overall: Solid Pass (Leaning Hire) — 2.7/4
+Key feedback: Revenue decomposition and creator segmentation (influencer/mid-tier/beginner) were strong. Action plan was the spike — 3-lens framework (parity/leapfrog/incentives), proactive guardrails, anti-gaming measures. Interviewer pushed forward to solutions = positive signal. Gaps: funnel came after categories (should lead), no % attribution per cause, no "blip or structural" systemic close. Unpracticed question type handled well.
 ---
 
-## 2026-06-28 — Google — Strategy — YouTube TV Strategy (carriage costs, FAST competition)
-Question: "YouTube TV is facing rising carriage costs, price-hike churn, and growing competition from FAST services (Tubi, Pluto, Freevee) and lower-priced bundles (Sling, Fubo). What should YouTube's strategy be for YouTube TV over the next 2-3 years?"
-Score: Thesis Clarity: 1.5/4, Market Knowledge: 3.5/4, Trade-off Reasoning: 3/4, Google/YT Fit: 3.5/4, Sizing: 1.5/4
-Overall: Borderline Pass
-Key feedback: Candidate intentionally dropped the canonical framework's thesis/lead-with-position step ("told you I am changing framework") — best ecosystem/competitive decomposition yet (4-layer: Device/OS, Content/Publishers, Ad-Tech, Measurement; correctly singled out Google+Amazon as the only vertically-integrated players). Segment-aware bets (eSports→Gen Z, weekly sports→Millennials, marquee events→broad reach) with real, named trade-offs (exclusivity = one-way door; production house = new org capability + quality risk). Explicit, reasoned skip of competing with FAST on price. Sizing was absent until prompted, and the first attempt (10% of $10B esports market = $1B) didn't reconcile top-down vs. bottom-up — walked through the math live (16.7B watch-hours implied at $10 CPM/6 ads-hr, far exceeding plausible scale) to show the gap. 3rd Strategy round in a row missing sizing as a default habit — same gap as the CTV round (2026-06-27) and the original baseline; needs to become automatic, not something that only appears after being asked twice.
+## 2026-06-28 — Google — Strategy — YouTube TV Strategy (practice)
+Question: "YouTube TV faces rising carriage costs, price-hike churn, and FAST competition. What should YouTube's strategy be for the next 2-3 years?"
+Score: Thesis: 3/4, Market Knowledge: 3.5/4, Trade-offs: 3/4, Company Fit: 2.5/4, Sizing: 2/4
+Overall: Solid Pass (first Strategy attempt)
+## 2026-06-29 — Google — Analytical — YouTube Premium Metrics
+Question: "Define 3-5 success metrics for YouTube Premium."
+Score: Product Rationale: 3/4, Goal Setting: 2.5/4, Measuring & Monitoring: 3/4, Evaluating Trade-offs: 3/4
+Overall: Solid Pass
+Key feedback: Background-play bias is best bias yet (product-specific, names mechanism, concrete fix). Revenue sizing sharp (125M×$12×12=~$18B). Good competitor differentiation (interest graph vs social graph). Strategic rationale nailed ("monetize ad-sensitive tier who'd otherwise churn"). Gaps: no explicit goal statement, NSM is growth metric (output) not retention (lever PM controls), missing "Premium's value is mostly escape-from-ads" strategic tension, too many unprioritized secondary metrics (7 — use funnel instead), missing free-trial cohort bias, guardrail too generic (needs ad-blocker rate, subscription cannibalization). See `examples/solved-analytical.md` Q4.
+---
+
+## 2026-06-29 — Google — Metric Diagnosis — YT Watch Time Drop (practice)
+Question: "Average watch time per user dropped 8% WoW. What do you do?"
+Score: Clarify: 3.5/4, Hypothesize: 3/4, Funnel: 3/4, Attribute: 2.5/4, Action: —/4, Systemic: —/4
+Overall: Solid (incomplete — stopped at Attribution)
+## 2026-06-29 — Google — Product Sense — Nara Baby Improvement (practice)
+Question: "Pick your favorite product. How would you improve it?" (Chose: Nara Baby tracking app)
+Score: Product Motivation: 3/4, Target Audience: 3.5/4, Problem Identification: 3.5/4, Solution Development: 3/4
+Overall: Solid Pass (strongest PS answer)
+Key feedback: Best segmentation across all answers — 3 behavioral dimensions combined into "first-time overwhelmed parents" with MECE justification. Pain points visceral and specific (hands occupied, can't find phone, can't remember details, colic/reflux parents go extra mile). V1/V2/V3 scoping is crisp. Pull-Based AI risk thoughtful (2am scary voice, calming tone needed). Goal stated but needs strategic depth — WHY does formula company want a tracking app? (CRM disguised as utility — brand exposure 8-10x/day). Metrics too narrow (only AI accuracy) — needs D30 retention, daily tracking completion rate, business metric (formula reorder rate app users vs non-users). Imagine close functional but needs more emotion. See `examples/solved-product-sense.md` Q3.
+---
+
+Key feedback: Best clarification yet (5 dimensions). External/internal separation working (improvement from interview). Funnel present in correct position. Missing: content format mix shift hypothesis (Shorts cannibalizing long-form — YouTube-specific), action plan, systemic signal close. Attribution formula needs refinement → use Sessions/user × Videos/session × Duration/video. See `examples/solved-analytical.md` Q5.
+---
+
+Key feedback: Competitive landscape mapping was the spike — multi-dimensional (Device/Content/AdTech/Measurement), vertical integration insight (only Google+Amazon). Goal stated. Two bets with timeframes and sequencing. Trade-offs per bet. Explicit FAST dismissal (justified but too quick). Gaps: sidestepped the core structural tension (bundle death spiral / pricing architecture), Bet 2 (production house) lacks "why Google" given YouTube Originals failure, no market sizing, FAST threat reframed at wrong level (content quality vs pricing perception), no Imagine close. See `examples/solved-strategy.md` Q1.
 ---
