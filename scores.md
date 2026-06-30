@@ -79,3 +79,10 @@ Key feedback: Best clarification yet (5 dimensions). External/internal separatio
 
 Key feedback: Competitive landscape mapping was the spike — multi-dimensional (Device/Content/AdTech/Measurement), vertical integration insight (only Google+Amazon). Goal stated. Two bets with timeframes and sequencing. Trade-offs per bet. Explicit FAST dismissal (justified but too quick). Gaps: sidestepped the core structural tension (bundle death spiral / pricing architecture), Bet 2 (production house) lacks "why Google" given YouTube Originals failure, no market sizing, FAST threat reframed at wrong level (content quality vs pricing perception), no Imagine close. See `examples/solved-strategy.md` Q1.
 ---
+
+## 2026-06-30 — Google — Strategy — Double YouTube's User Base
+Question: "How would you double YouTube's user base?"
+Score: Thesis Clarity: 3/4 (4/4 after redrill), Market Knowledge: 3/4, Trade-off Reasoning: 4/4, Google Fit: 3/4, Sizing: 2/4 (3/4 after redrill)
+Overall: Solid / Borderline-Pass (first pass) → Strong opening after 90-sec redrill
+Key feedback: Trade-off reasoning was the spike — explicit kill list (feature phones, Project Loom-style connectivity) each with reasons tied to core competency, proactive gaming/view-farming risk, smart SFV→LFV creator cold-start ladder. Macro trends and SWOT well-grounded (data cost as rent/food-tier expense, not generic "data is expensive"). Gaps on first pass: no thesis upfront (stated framework opt-out was incorrect calibration — fence-sitting is an explicit Google fail signal), sizing math didn't reconcile (1.4B×60%=840M vs. unexplained 800M×0.5×0.3 substitution). Redrilled the thesis+sizing open standalone: nailed one-sentence falsifiable thesis with explicit "not X, not Y," equation-before-numbers sizing, consistent assumption set, self-sanity-checked against existing India base (~450-500M) and flagged result as aggressive. Remaining gap: conversion-rate jump (30%→50%) asserted not derived — should tie to own creator-pipeline mechanism. See `solved-strategy.md` Q2.
+---
