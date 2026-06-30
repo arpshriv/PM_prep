@@ -539,3 +539,144 @@ That's Maps doing what Google does best — organizing the world's information �
 - **Explicit exclusions with rationale**: No booking, no social, no safety ratings — each with a specific reason
 - **Metrics with NSM + guardrails + bias + revenue connection**: Full analytical treatment embedded in Product Sense
 - **Revenue connection named**: Discovery-to-navigation journeys = monetizable moments (promoted suggestions, affiliate bookings, data for local ads)
+
+---
+
+## Q3: "Pick your favorite product. How would you improve it?" — Nara Baby Tracking App
+
+**Product**: Nara Baby — free baby activity tracking app by formula manufacturer
+**Framework**: Canonical Product Sense (Comprehend)
+**Key framing**: The app is a CRM disguised as a utility — the business purpose is formula customer retention, not app revenue.
+
+---
+
+### Comprehend
+
+**What is Nara Baby?** Free mobile app for new parents to track feeds (formula/breast), diaper changes, naps, and basic health metrics for newborns. Built by Nara, a major US formula brand.
+
+**Why should we care?**
+
+The app is free because it's not the product — it's the **customer retention funnel for formula sales**. A parent who tracks feeds in the Nara app sees the Nara brand 8-10 times per day. The app creates habitual brand exposure that drives formula purchase loyalty. Parents who use the Nara app are more likely to stay with Nara formula AND less likely to switch brands, because switching formula means their tracking history and feeding schedules become inconsistent.
+
+The first year of a baby's life is the critical window — parents need the most help, track the most obsessively, and make the most formula purchases. After year 1, tracking drops off as routines stabilize.
+
+**Mission**: Help parents efficiently and joyfully monitor the growth of their babies.
+
+**Goal**: Make Nara Baby so indispensable in the first year that parents who start with it stay with Nara formula — and parents who don't use Nara discover it through the app. The metric isn't app engagement — it's **formula purchase retention among app users vs non-users.**
+
+**Competition**: Fragmented market — Pampers, Huckleberry, Baby Tracker, Snoo (sleep-only). No clear market leader. All are functional utilities with similar feature sets. Differentiation opportunity is wide open.
+
+**Strengths**: High brand awareness (Nara is a household name), functional app that covers basics, built-in distribution through formula packaging (QR codes, inserts).
+
+**Weaknesses**: Not a tech company (engineering talent, AI capabilities are limited), recent PR incident (product recall — brand trust damaged), no data science sophistication for personalization.
+
+**Latent behavior**: Health tracking normalized by Gen Z/Millennials (Apple Watch, Oura Ring). New parents are extending quantified-self habits to infant care.
+
+### Identify Users
+
+**Ecosystem**: Platform providers, Parents, Babies, Nannies/Doulas, Hospitals/Pediatricians
+
+**Prioritize parents** — they have the most severe needs and make the purchase decisions.
+
+**Three behavioral dimensions combined:**
+
+| Dimension 1: Tracking behavior | Dimension 2: Experience | Dimension 3: Brand |
+|---|---|---|
+| Serious trackers (log everything) | Experienced (2nd+ child) | Nara customer |
+| Overwhelmed (want to track but miss entries) | First-time parent | Non-Nara customer |
+
+**Prioritized: First-time overwhelmed parents**
+
+Why: Serious trackers are already satisfied with the functional app. Experienced parents know the process and worry less. First-time overwhelmed parents have the HIGHEST pain severity (everything is new, anxiety is highest, hands are always full) AND the highest business value (if we win them now, we retain them for 12+ months of formula purchases).
+
+### Report Needs — User Journey & Pain Points
+
+**Journey of a first-time parent with a 3-week-old:**
+
+The day runs in 2-3 hour cycles: baby cries → feed (formula needs to increase every 1-2 weeks as stomach grows) → burp → diaper change → brief awake time → nap → repeat. Between cycles: pump breast milk (every 3 hours), eat something yourself, maybe shower, check if you have enough diapers/formula.
+
+**Pain Points:**
+
+1. **"Can't track when it matters"** (HIGHEST — frequency 8-10x/day, severity: HIGH)
+Hands are holding the baby. Phone is across the room. By the time baby is back in the crib and you find the phone, you can't remember: was it 3oz or 4oz? Did I start feeding at 2:15 or 2:30? Was the diaper wet or dirty? Missed entries → incomplete data → anxiety ("am I tracking wrong? Is my baby getting enough?")
+
+2. **"Is my baby normal?"** (HIGH — frequency: daily worry, severity: HIGH)
+With some missed entries and fragmented data, parents can't tell if their baby's feeding/sleeping patterns are healthy. They wait for the monthly pediatrician visit to get reassurance — but that's 30 days of anxiety. "My baby only slept 12 hours yesterday — is that bad? My friend's baby sleeps 16."
+
+3. **"What should I be doing NOW?"** (MEDIUM — frequency: weekly, severity: MEDIUM)
+Pediatrician gives advice monthly, but baby development changes weekly. "When should I increase from 3oz to 4oz feeds? When do I switch bottle nipple sizes? Is it time to try tummy time?" Parents rely on Facebook mom groups and Reddit — unreliable, contradictory, anxiety-inducing.
+
+4. **"How does my baby compare?"** (MEDIUM)
+No benchmark data except the growth chart at the pediatrician. Parents want to know: "Is my baby in the normal range for their age?"
+
+**Prioritization**: PP1 (tracking friction) for V1 — it's the highest frequency pain, it's the core utility of the app, and solving it directly increases data completeness which enables PP2-4 in future versions. PP2+4 are V2 (benchmarking against cohort data). PP3 is V3 (expert-vetted developmental guidance — requires medical content partnerships).
+
+### Product Principles
+
+1. **Zero-hands input** — every feature must work when you're holding a baby in one arm and a bottle in the other
+2. **Calm, not alerting** — new parents are already anxious. The app should reduce anxiety, not create it. Notifications should feel like a gentle assistant, not an alarm.
+3. **The app tracks FOR you, not BECAUSE of you** — shift from "parent inputs data" to "AI captures data, parent confirms"
+
+### Solution: Pull-Based AI Assistant
+
+Instead of parents opening the app and manually entering data, the AI proactively checks in, confirms, and logs entries.
+
+**How it works:**
+
+*2:15am. Baby cries. You pick her up, start feeding. Your phone on the nightstand gently vibrates once. A soft notification: "Feeding started? Tap or say yes." You murmur "yes." Fifteen minutes later, baby falls asleep on your chest. Another gentle prompt: "Feeding done? How many ounces?" You whisper "four." Entry logged. You never unlocked the phone, never opened the app, never typed anything.*
+
+*7am. You wake up (sort of). The app shows a calm summary card: "Last night: 3 feeds totaling 11oz. 2 diaper changes. 4.5 hours of sleep between feeds. All within normal range for week 3. You're doing great."*
+
+**Key design decisions:**
+- **Voice + tap dual input**: Whisper-compatible voice recognition (babies are sleeping nearby) OR single-tap confirmation on lock screen
+- **Predictive timing**: AI learns the baby's pattern. After 3 days, it knows feeds happen roughly every 2.5 hours. It prompts 10 minutes before the predicted next feed: "Feed coming up soon?"
+- **Non-intrusive nighttime mode**: Between 8pm-7am, prompts are vibration-only with dim lock-screen notifications. No audio unless parent has opted in. The voice is warm, slow, and calm — tested with sleeping infants to ensure it doesn't wake them.
+- **Pattern detection**: "Baby fed 2oz less than yesterday — this is normal for growth spurts" or "3 wet diapers today vs usual 5 — worth mentioning to your pediatrician tomorrow"
+
+**Why this over the alternatives:**
+- In-app voice assistant: Still requires finding and opening the phone — doesn't solve the core problem
+- Smart home integration (Alexa/Google Home): Better, but requires the parent to have a smart speaker in the nursery, and speaking at normal volume risks waking the baby. Also depends on third-party integration timelines.
+- Pull-based AI on the phone: Works on every phone, no extra hardware, whisper-compatible, proactive rather than reactive
+
+**V1 scope**: Feed tracking + diaper tracking via pull-based AI prompts. Nap tracking via motion detection (phone on crib/bassinet detects stillness).
+
+**V1 excludes**: Benchmarking against other babies (V2 — needs cohort data), developmental milestones guidance (V3 — needs medical partnerships), formula reorder (V2 — needs e-commerce integration).
+
+### Success Metrics
+
+**NSM**: % of daily activities tracked (feeds + diapers + naps) per active parent per day — target 80%+. This captures whether the app is successfully reducing tracking friction. If parents are capturing 80%+ of activities, the data is complete enough to be useful AND they're engaged enough to retain.
+
+**Secondary:**
+- D30 parent retention (do they stick past the chaotic first month?)
+- AI-assisted entries as % of total (is the AI feature being adopted?)
+- Time spent on manual input per day (should DECREASE as AI takes over — target: <2 min/day)
+- Morning summary viewed rate (are parents finding the daily recap valuable?)
+
+**Business metric**: Formula reorder rate among app users vs non-users — the actual business reason the app exists. If app users reorder Nara formula at 85% vs 60% for non-users, the app is working as a retention tool.
+
+**Guardrails:**
+- AI entry error rate (% of AI-logged entries that parents manually correct) — must stay <5%
+- Notification opt-out rate — if parents disable prompts, the AI is annoying rather than helpful
+- Baby wake-up incidents attributed to app sounds — must be near-zero
+
+**Bias:**
+- **Engaged parent skew**: Parents who track obsessively will love this feature and inflate satisfaction metrics. But the target segment is OVERWHELMED parents who track inconsistently — measure adoption and satisfaction separately for this cohort. Fix: segment metrics by pre-AI tracking frequency (high vs low trackers).
+- **Night vs day usage skew**: Most tracking friction happens at night (exhaustion, darkness, baby in arms). But most A/B testing and user research happens during business hours with alert, cooperative participants. Fix: specifically test and measure nighttime UX.
+
+### Imagine
+
+"Imagine a first-time mom, three weeks in. It's 3am. Her daughter is crying. She picks her up, starts feeding, and her phone quietly vibrates once on the nightstand. She doesn't even look at it — she just whispers 'yes.' Fifteen minutes later, baby's asleep on her chest, and she whispers 'four ounces.' Done.
+
+In the morning, she opens the app for the first time all day. A gentle summary: three feeds, eleven ounces, two diaper changes, four and a half hours of sleep. A small note: 'All within normal range for week 3. She's growing beautifully.'
+
+For the first time in three weeks, she doesn't feel behind. She didn't miss an entry. She didn't forget an ounce. The app tracked it for her while she was just being a mom. And that moment — when a first-time parent stops managing data and starts trusting that they're doing okay — that's the product."
+
+### L6 Altitude Moves
+
+- **Named the business model behind the free app**: "CRM disguised as utility — brand exposure 8-10x/day drives formula retention"
+- **Three-dimension combined segmentation**: Tracking behavior × experience × brand loyalty → "first-time overwhelmed parents"
+- **Pain points from lived experience**: Specific details (formula increases weekly, pumping every 3 hours, colic/reflux) that only a parent would know
+- **Solution described as a scene, not a spec**: The 2am feeding scenario IS the product pitch
+- **Business metric alongside product metrics**: Formula reorder rate app users vs non-users
+- **Night-specific design decisions**: Whisper recognition, vibration-only mode, tested with sleeping infants
+- **Bias specific to the product**: Night vs day testing skew — most research happens during business hours but most usage is at 3am
