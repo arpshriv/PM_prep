@@ -589,3 +589,35 @@ Based on the funnel check, assign % of the 8% drop to each cause:
 - **Systemic signal with stakeholder mapping**: Bug → engineer. Format shift → monetization team. Competitive → leadership. The 8% is the symptom; the response depends on the cause.
 - **Three biases**: Denominator inflation, format mix, power user regression — each with shape + fix
 - **Attribution with %**: "Sessions dropped 6%, accounting for 75% of the 8% drop" — quantified, not just listed
+---
+
+---
+
+## Q6: "You're a PM at Google Maps. DAU dropped 15% overnight. Walk me through how you'd diagnose it."
+
+**Company**: Google
+**Framework**: Root Cause Diagnosis
+**Key framing**: 15% overnight + global + all platforms = internal cause. The cliff shape kills all external hypotheses before you build the full list. The L6 move is using the shape of the drop as the first filter, then the funnel position to narrow the internal cause.
+
+### Clarify (5 dimensions)
+- **Magnitude**: 15% of 1B DAU = 150M missed daily active users
+- **Definition**: DAU = at least 1 navigation session per day
+- **Timeline**: within the last 24 hours (overnight cliff, not a gradual bleed)
+- **Geo**: global
+- **Platform**: all surfaces — iOS, Android, CarPlay/Android Auto
+
+### The Shape Filter
+Cliff (overnight) + global + all platforms = internal, not external. Eliminates seasonality, competitive, macro hypotheses immediately.
+
+### Survivors: App Release (primary) → Infra → A/B Test
+
+### Funnel: Drop at app opens (-10%) → pre-navigation cause → rules out route/search/traffic bugs
+
+### Attribution
+- Check deploy history → segment DAU by app version → v-new users flat vs. v-old users drop = confirmed
+- Magnitude: 1B × 30% auto-update × 50% opened = 150M = matches 15% drop ✅
+
+### Action + Systemic
+- Rollback immediately, brief VP/comms/support
+- Add DAU cliff-detection alert (>5% drop in 2h window)
+- Require canary rollout gate (1% → monitor → auto-promote/rollback) before global releases
