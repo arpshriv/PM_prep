@@ -145,3 +145,103 @@ That's not cable 2.0. That's what cable should have been — if cable had YouTub
 - **Market sizing**: NFL = 2M signups, additional properties = $200-500M vs $90-180M revenue
 - **Bundle economics**: ESPN price hike → only sports subscribers absorb, not all 8M
 - **Imagine close**: Austin family, all three bets visible in one scene
+
+  ## Q2: "How would you double YouTube's user base?"
+
+**Company**: YouTube/Google
+**Framework**: Canonical Strategy
+**Key framing**: "Doubling user base" = growing existing customer base 2x via acquisition (clarified upfront), not redefining what "user" means. The L6 move is recognizing this is a *barrier-removal* problem (language + data cost) in countries YouTube already has a foothold in — not a new-geo-expansion or connectivity-infrastructure problem.
+
+---
+
+### Thesis (stated first, 60 seconds)
+
+**"The next 2x in users comes from removing language and data-cost barriers in countries where we already have a foothold — primarily India, Indonesia, Brazil — not from new-geo expansion or building connectivity infrastructure in countries where it doesn't exist."**
+
+### Why This Matters for Google
+
+More users → higher watch time → more inventory for ads/subscriptions → revenue. YouTube is at 3B+ users; growth in developed markets (US, UK, Germany) has plateaued. The next 2x must come from developing/underdeveloped economies where YouTube has partial penetration.
+
+### Macro Trends
+
+- Declining attention spans; young users enter via Shorts, graduate to long-form
+- Mobile is majority watch-time share today; CTV is the fastest-growing surface
+- AI (Gemini, Veo) has lowered the barrier to entry for content creation
+
+### Competitive Landscape
+
+- **Big screen**: Netflix, Hulu, Disney+, Prime Video
+- **Mobile/short-form**: TikTok (where not banned), Instagram Reels
+- **The real competitor in target markets**: the *data plan itself*. In developing/underdeveloped economies, mobile data is one of the highest household expenses after rent/food — local apps built data-light from day one (vs. YouTube retrofitting) are the structural threat.
+
+### SWOT
+
+**Strengths**: Largest content repository globally; thriving creator-consumer-ads ecosystem; 1P cross-surface contextual data; Gemini + Veo as an AI powerhouse for content tooling.
+
+**Weaknesses**: New-technology connectivity bets (e.g., Project Loom-style efforts) are not a core competency; low penetration in underdeveloped countries; vernacular (local-language) content is thin.
+
+**Opportunities**: Falling data costs are expanding the addressable smartphone population in developing markets; vernacular content is a rising demand category with visible interest but thin supply on the platform.
+
+**Threats**: Local streaming/short-video apps are built data-native from the ground up; YouTube is retrofitting low-data support onto a platform designed around unlimited-data assumptions.
+
+### Key Challenges (named explicitly, ladder to the thesis)
+
+1. A large share of the population is still migrating from feature phones to smartphones.
+2. Data cost has fallen but remains one of the highest household expenses in target markets; YouTube's product defaults (HD autoplay) assume unlimited data, which these markets don't have.
+3. Local-language content supply is thin — e.g., in India, most states have a distinct primary language, but supply skews English/Hindi, leaving an estimated 20-30%+ of in-country population underserved.
+
+### Bet 1: Vernacular Content — Demand & Supply (P1, mid-term)
+
+Two-sided program:
+- **Incentivize local-language creation.** Dollar-denominated incentive payouts are comparatively cheap against most local currencies, making this capital-efficient.
+- **Solve the cold-start problem for first-time creators** with a tiered, graduated incentive ladder: new creators start in Shorts (low production bar) → earn incentive payouts once they hit view thresholds → graduate to long-form once they've built a subscriber base. This avoids requiring polished long-form content from day one, which most first-time local creators can't produce.
+- **Use Gemini to assist creators** in local languages (captioning, dubbing, content tooling) — this simultaneously trains the moderation model on local-language content, solving the quality-review gap.
+
+**Metrics**: % increase in vernacular videos/month (supply), % watch time in vernacular categories/month (demand), videos uploaded/week by tier.
+**Guardrail**: vernacular-category content reported for violations; flag for view-farming / incentive gaming (high view count without unique-viewer diversity or genuine engagement signals).
+**Risk**: requires human reviewers fluent in local languages initially, since moderation models aren't yet well-trained on these languages — Gemini-assisted creation should close this gap over time.
+
+### Bet 2: Build for Low Data Consumption (P0 — re-prioritized above Bet 1 on speed)
+
+Relax default behaviors that assume unlimited data: HD-default autoplay, aggressive prefetching. Target experience for $30-50 smartphones (the dominant device class via low-cost Chinese/Indian brands) where users "think in MBs, not GBs."
+
+**Why P0 over Bet 1**: this is a 3-month lever (default/config change) vs. vernacular content's multi-quarter payback (creator incentive programs need time to build supply). Sequence: ship the data-defaults fix first to capture the faster win, run vernacular incentives in parallel as the mid-term compounding bet.
+
+**Metric**: number of videos reported as "unwatchable quality" — guardrail against compressing so aggressively that the experience degrades past usability.
+
+### What I'm Explicitly NOT Doing
+
+1. **Not building for feature phones.** Requires investment well outside YouTube's product core; the funnel here is smartphone users who already have YouTube installed but face language/data friction — a faster, higher-confidence path to 2x than converting feature-phone users.
+2. **Not investing in connectivity infrastructure (Project Loom-style).** Not a Google/YouTube strength; would divert focus from the acquisition problem onto an infrastructure problem better solved by telcos.
+
+### Sizing (India, as representative market)
+
+Equation stated before plugging numbers: **population outside primary covered languages × smartphone penetration × expected conversion to YouTube.**
+
+- India population: 1.4B; ~60% outside English/Hindi content coverage → 840M addressable
+- Smartphone penetration in that segment: ~50% (low-cost Chinese/Indian-brand devices) → 420M reachable
+- Expected conversion: 30% in Y1 (vernacular library still building) → 50% by Y2 (as the Shorts→long-form creator pipeline matures and local supply catches up)
+- **Y1: 840M × 0.5 × 0.3 ≈ 126M new users.** **Y2 cumulative: 840M × 0.5 × 0.5 ≈ 210M.**
+- **Sanity check**: YouTube's existing India base is already ~450-500M, so +126M in Y1 is a ~25%+ jump — aggressive but directionally plausible only if the data-defaults fix (Bet 2) ships first and removes the adoption friction that's independent of language.
+- Apply the same funnel shape to Indonesia and Brazil (smaller bases, similar language/data dynamics) for the full 2x claim — directionally additive, not sized in full here.
+
+### Trade-offs & Recommendation
+
+**Recommend**: sequence Bet 2 (data defaults) first as the fast lever, Bet 1 (vernacular) as the compounding mid-term bet, explicitly rejecting feature-phone support and connectivity infrastructure plays.
+
+**What I'm accepting**: slower payback on the vernacular bet, dependency on local human reviewers as a near-term cost, risk of incentive gaming.
+**Leading indicator I'd watch**: vernacular watch-time share and creator supply growth in the pilot market (e.g., one Indian state) before scaling the incentive budget nationally. If supply doesn't respond to incentives within 2 quarters, revisit the program design before committing further spend.
+
+### Metrics (overall)
+
+**NSM**: net new users from developing economies, month over month.
+**Guardrails**: unwatchable-quality reports (Bet 2), reported-content rate in vernacular categories (Bet 1), incentive-gaming signals (Bet 1).
+
+### L6 Altitude Moves
+
+- **Thesis stated in one sentence, first** — explicit "not X, not Y" framing
+- **Speed vs. depth trade-off made explicitly**: re-prioritized data-defaults (P0, 3 months) over vernacular content (mid-term) when probed, rather than defending the original order out of inertia
+- **Cold-start mechanism for creators**: SFV→LFV graduation ladder solves a real adoption problem, not just "pay people to upload"
+- **Kill with reasons**: feature phones and connectivity infrastructure explicitly rejected, each with a specific reason tied to core competency
+- **Transparent, auditable sizing**: equation stated before numbers, one consistent assumption set, sanity-checked against known existing base, explicitly flagged as aggressive
+- **Named the leading indicator** that would trigger a reconsideration of the bet
