@@ -86,3 +86,10 @@ Score: Thesis Clarity: 3/4 (4/4 after redrill), Market Knowledge: 3/4, Trade-off
 Overall: Solid / Borderline-Pass (first pass) → Strong opening after 90-sec redrill
 Key feedback: Trade-off reasoning was the spike — explicit kill list (feature phones, Project Loom-style connectivity) each with reasons tied to core competency, proactive gaming/view-farming risk, smart SFV→LFV creator cold-start ladder. Macro trends and SWOT well-grounded (data cost as rent/food-tier expense, not generic "data is expensive"). Gaps on first pass: no thesis upfront (stated framework opt-out was incorrect calibration — fence-sitting is an explicit Google fail signal), sizing math didn't reconcile (1.4B×60%=840M vs. unexplained 800M×0.5×0.3 substitution). Redrilled the thesis+sizing open standalone: nailed one-sentence falsifiable thesis with explicit "not X, not Y," equation-before-numbers sizing, consistent assumption set, self-sanity-checked against existing India base (~450-500M) and flagged result as aggressive. Remaining gap: conversion-rate jump (30%→50%) asserted not derived — should tie to own creator-pipeline mechanism. See `solved-strategy.md` Q2.
 ---
+## 2026-06-30 — Google — Root Cause Diagnosis — Google Maps DAU Drop
+Question: "You're a PM at Google Maps. DAU dropped 15% overnight. Walk me through how you'd diagnose it."
+Score: Clarify: 4/4, Hypothesize: 3.5/4, Funnel: 3/4, Attribute: 3.5/4, Action+Systemic: —/4 (not attempted)
+Overall: Solid Pass — 3.3/4
+Key feedback: Strong clarification (5 dimensions). Attribution was the spike — killed infra and A/B test with specific logic, confirmed magnitude (300M × 50% = 150M). Gaps: cliff shape not named upfront as the fast external/internal discriminator; funnel built but not used to narrow cause; attribution confirmation data pull not named; Action+Systemic close not attempted. See solved-analytical.md Q6.
+---
+
