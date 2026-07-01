@@ -93,3 +93,9 @@ Overall: Solid Pass — 3.3/4
 Key feedback: Strong clarification (5 dimensions). Attribution was the spike — killed infra and A/B test with specific logic, confirmed magnitude (300M × 50% = 150M). Gaps: cliff shape not named upfront as the fast external/internal discriminator; funnel built but not used to narrow cause; attribution confirmation data pull not named; Action+Systemic close not attempted. See solved-analytical.md Q6.
 ---
 
+## 2026-07-01 — Google — Metrics — AI Overviews Success Metrics
+Question: "Define success metrics for Google's AI Overviews feature."
+Score: Product Rationale: 4/4, Goal Setting: 3/4, Measuring & Monitoring: 3/4, Evaluating Trade-offs: 3/4
+Overall: Solid Pass — 3.25/4
+Key feedback: Product rationale was the spike — named the user behavior shift, ad revenue dependency, and cannibalization tension (Google earns more, publishers earn less) explicitly. Funnel metrics showed good instincts (show-more, follow-up questions, WoW return, copy/share). Gaps: NSM ("% spending >30s") measures attention not resolution — better is "Zero-Escape Rate" (% of queries resolved without click-out or reformulation); click-out framed as failure when cited-source click-out is actually success; guardrails too narrow (thumbs-down only) — missing publisher organic CTR (existential ecosystem risk) and hallucination/factual error rate (trust/brand risk). Bias section solid (training data skew, adoption ramp). See solved-analytical.md Q7.
+---
