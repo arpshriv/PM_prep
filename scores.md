@@ -36,6 +36,15 @@ Key feedback: Goal stated (first time!). Combined segmentation (behavioral × lo
 
 ## 2026-06-24 — Google — Product Sense — Improve Google Maps
 Key feedback: Best answer yet — fixed all 3 major gaps from AR glasses. Segmentation is clean (5 behavioral segments, consistent dimension, tourist chosen with rationale + scale path). User journey is segment-specific (tourist micro-decisions). Solutions anchored in Google's strength (Gemini). Has metrics AND "Imagine" close (Japan family, baby in stroller). Autonomous car latent behavior insight is non-obvious. Remaining gaps: no explicit goal statement before solutions, missing Maps undermonetization strategic insight, weakness section too thin, Solution 2 (friends/pins) already partially exists in Maps, metrics need NSM/guardrails/bias treatment. See `examples/solved-product-sense.md` Q2 for model answer.
+## 2026-06-13 — Google — Product Sense — YouTube Learning Product (retroactive grade)
+Question: "Design a YouTube product for people trying to learn a new skill"
+Score: Product Motivation: 3/4, Target Audience: 3/4, Problem Identification: 3/4, Solution Development: 3/4
+Overall: Solid Pass
+Key feedback: Goal stated (first time!). Combined segmentation (behavioral × location = "serious learners + indoor skills"). 3-solution prioritization matrix with Impact/Feasibility/Cost. MVP is concrete (Gemini icon → query → learning path). Risks named per solution. Latent behaviors sharp (RTO commute, AI FOMO). Missing: "Imagine" close, bias section, guardrails, ecosystem metrics. Goal is circular ("monetize watch time" doesn't say why strategically). Solution 2 (YT Course) is essentially Coursera-on-YouTube, not differentiated. Real competitor is YouTube's OWN search+playlist experience, not just Coursera.
+---
+
+## 2026-06-24 — Google — Product Sense — Improve Google Maps
+Key feedback: Best answer yet — fixed all 3 major gaps from AR glasses. Segmentation is clean (5 behavioral segments, consistent dimension, tourist chosen with rationale + scale path). User journey is segment-specific (tourist micro-decisions). Solutions anchored in Google's strength (Gemini). Has metrics AND "Imagine" close (Japan family, baby in stroller). Autonomous car latent behavior insight is non-obvious. Remaining gaps: no explicit goal statement before solutions, missing Maps undermonetization strategic insight, weakness section too thin, Solution 2 (friends/pins) already partially exists in Maps, metrics need NSM/guardrails/bias treatment. See `examples/solved-product-sense.md` Q2 for model answer.
 ---
 
 ## 2026-06-24 — Google — Analytical — YouTube Search Results Page Metrics
