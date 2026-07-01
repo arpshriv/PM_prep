@@ -621,3 +621,88 @@ Cliff (overnight) + global + all platforms = internal, not external. Eliminates 
 - Rollback immediately, brief VP/comms/support
 - Add DAU cliff-detection alert (>5% drop in 2h window)
 - Require canary rollout gate (1% → monitor → auto-promote/rollback) before global releases
+
+## Q7: "Define success metrics for Google's AI Overviews feature."
+
+**Company**: Google
+**Framework**: Canonical Analytical
+**Key framing**: AI Overviews is a defensive play to retain users who would otherwise shift to ChatGPT/Claude for direct answers. The core tension: it saves Google's consumer surface but cannibalizes publisher CTR and threatens the content ecosystem that feeds the model. Metrics must capture both the user value AND the ecosystem health — missing either is a fail.
+
+---
+
+### What is AI Overviews designed to do?
+
+Post-AI-boom, user behavior shifted: people want direct answers, not 10 blue links requiring 4 tab-opens to synthesize. ChatGPT/Claude offered this. Google launched AI Overviews to retain these users within its surface rather than lose them to frontier model companies. It works by summarizing search results into a single AI-generated response at the top of the SERP.
+
+### Why Google is investing
+
+- **Mission**: "Organize the world's information and make it universally accessible" — AI Overviews is the most literal expression of this mission yet
+- **Ecosystem impact**: Keeps users on Google's surface longer; enables AI-powered ad targeting against declared intent; higher commercial dwell time
+- **Revenue**: Sponsored links inserted within AI Overview for commercial-intent queries — Google earns ad revenue while reducing organic click-out. Net effect: higher revenue per search session, at the cost of publisher traffic
+
+**The tension to name explicitly**: AI Overviews makes Google more money in the short term but cannibalizes the publisher ecosystem whose content it summarizes. If publishers stop creating content, the training data and source quality degrades — a slow death spiral for the product itself.
+
+### When users derive value
+
+A user derives value when they get a complete, accurate answer to their query without needing to click any links, reformulate their search, or open a second tab. The moment of value is **query resolution in one interaction**.
+
+### North Star Metric
+
+**"Zero-Escape Rate"** — % of AI Overview sessions where the user needed nothing else (no click-out to organic results, no query reformulation, no follow-up search within 60 seconds).
+
+Why this, not time-spent: time-on-page measures attention, not resolution. A user staring at a confusing overview for 45 seconds got no value. Zero-Escape Rate measures the core promise directly: *you got your answer here*.
+
+### Input / Lever Metrics (funnel)
+
+| Metric | What it measures |
+|---|---|
+| % of queries triggering an AI Overview | Coverage — are we serving enough queries? |
+| % of users clicking "Show more" per query | Attempted engagement — user started reading |
+| % of users entering 1+ follow-up questions | Deep engagement — overview sparked curiosity or needed clarification |
+| % of users clicking a *cited source within* the overview | Success click-out — overview added value, user wants depth |
+| WoW return rate of AI Overview users | Retention — users got value and came back |
+| % of users copying / sharing the overview | Utility signal — answer was worth keeping |
+
+**Click-out disambiguation (critical):**
+
+| Click pattern | Signal |
+|---|---|
+| Reads overview → clicks cited source *within* it | ✅ Success — overview delivered, curiosity sparked |
+| Ignores overview → clicks organic result below | ❌ Failure — overview not trusted or irrelevant |
+| Reads overview → reformulates query | ❌ Failure — answer incomplete or wrong |
+
+Segment by *where* on the page they clicked and *whether they dwelled on the overview first* (>5s before click).
+
+### Guardrail Metrics
+
+**1. Publisher organic CTR, week over week** ← the existential guardrail
+If AI Overviews cannibalize publisher traffic at scale, publishers stop creating content. This degrades the source quality and training data the feature depends on — a death spiral. This metric must be watched at the portfolio level, not just per query.
+
+**2. Hallucination / factual error rate**
+% of AI Overviews flagged as factually incorrect (via thumbs-down, editorial audit, or 3P fact-check). AI Overviews has had high-profile factual errors (e.g., "eat one small rock per day"). Each error is a brand/trust event at Google's scale. Near-zero tolerance for medical, legal, financial queries.
+
+**3. Thumbs-down rate per query**
+Direct user signal that the overview was not useful or was misleading.
+
+**4. Sponsored link CTR within AI Overview**
+Guardrail in both directions: if too high, users feel the overview is an ad vehicle (trust erosion); if too low, the monetization model isn't working.
+
+### Ecosystem Metric
+
+**CTR on sponsored links within AI Overview per week** — the revenue model proof point. AI Overviews inserts sponsored results for commercial-intent queries; this metric validates that the ad model works within the new format.
+
+### Bias
+
+**1. Training data skew**: AI Overviews surfaces content based on what the model was trained on — which skews toward high-PageRank, English-language, influencer-heavy sources. A recipe question surfaces a popular food blogger's version, not the traditional or most accurate one. Fix: segment overview quality ratings by query category and source diversity.
+
+**2. Adoption ramp bias**: AI Overview adoption is gradual, especially among older / non-tech-native users. Low Zero-Escape Rate in the first 6 months may look like product failure but is actually adoption lag. Fix: segment metrics by user cohort (first AI Overview session date) and track cohort-level improvement over time, not just aggregate.
+
+**3. Query type bias**: AI Overviews work well for factual, bounded queries ("capital of France") and poorly for nuanced, opinion-based, or rapidly changing queries ("best stock to buy now"). Averaging across query types masks failure modes. Fix: segment NSM by query intent category (factual / navigational / transactional / exploratory).
+
+### L6 Altitude Moves
+
+- **Named the core tension upfront**: AI Overviews saves the consumer surface but cannibalizes the publisher ecosystem that feeds it — death spiral risk if publisher guardrail is ignored
+- **NSM measures the promise, not vanity**: "Zero-Escape Rate" vs. time-spent — one measures resolution, one measures attention
+- **Click-out disambiguation table**: distinguished success click-out (cited source) from failure click-out (ignoring overview, clicking organic) — most candidates treat all click-out as negative
+- **Publisher CTR as existential guardrail**: not just a quality signal — a structural risk to the content flywheel
+- **Three biases with category + fix**: training data skew, adoption ramp, query type — each with segment-level fix
