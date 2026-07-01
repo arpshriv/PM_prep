@@ -680,3 +680,136 @@ For the first time in three weeks, she doesn't feel behind. She didn't miss an e
 - **Business metric alongside product metrics**: Formula reorder rate app users vs non-users
 - **Night-specific design decisions**: Whisper recognition, vibration-only mode, tested with sleeping infants
 - **Bias specific to the product**: Night vs day testing skew — most research happens during business hours but most usage is at 3am
+
+------
+
+## Q4: "You're a PM at Google. Design a product that helps people manage their mental health."
+
+**Company**: Google
+**Framework**: Canonical Product Sense (Comprehend)
+**Key framing**: Mental health spans a wide severity spectrum — from everyday stress/anxiety to serious clinical disorders. The L6 move is recognizing the middle of this spectrum (stressed daily workers, pre-clinical) is both the highest-reach opportunity AND the one Google can serve without requiring medical licenses. This is a prevention play, not a treatment play.
+
+
+### Comprehend
+
+**What does "manage mental health" mean?** Self-sufficient ability to regulate emotional/mental states — from awareness that something is wrong, through finding and applying coping strategies, to building sustainable daily routines. "Manage" explicitly excludes acute clinical treatment (that's a doctor's job).
+
+**Assumptions:** Standalone app backed by Google, US launch first (regulatory/privacy norms vary globally), mobile-first.
+
+**Why should we care?**
+
+Mental health is Google's **information access problem in disguise**. People suffering from stress and anxiety often don't know they have a problem, don't know where to look, and when they do find resources the market is fragmented (Calm, Headspace for meditation; BetterHelp for therapy; Crisis Text Line for emergencies) with no coherent path between them. Google's mission — "organize the world's information and make it universally accessible" — maps directly to this gap.
+
+**Macro trends:**
+- RTO mandates increased anxiety for workers who relocated during COVID
+- AI/automation creating job insecurity at scale — FOMO and career anxiety rising sharply
+- Mental health stigma declining (Gen Z/Millennials openly discuss therapy) — demand rising
+- Telehealth normalization post-COVID means people are comfortable with remote care
+
+**Competitive landscape:**
+- **Low end**: Calm, Headspace, Woebot — meditation/breathing. Fragmented, no leader
+- **Mid**: BetterHelp, Talkspace — licensed therapists. High cost ($60-100/session)
+- **High end**: Licensed psychiatrists, hospitals — outside Google's scope
+- **Gap**: Nothing connects early-stage stress to appropriate resources or catches someone before they need clinical care
+
+**Strengths:** Gemini AI (conversational, empathetic, personalized at scale); 1P cross-surface contextual data (Search, YouTube); largest Android distribution; Google's trust brand.
+
+**Weaknesses:** Not a licensed medical provider — must stay in "wellness" lane; privacy perception risk with mental health data specifically; consumer hardware execution weak (avoid HW bets).
+
+**Goal**: Help stressed daily workers recognize, understand, and manage their mental state before it escalates to clinical severity — a prevention play, not a treatment play.
+
+---
+
+### Identify Users
+
+**Consumer segments by severity spectrum:**
+
+| Segment | Profile | Decision |
+|---|---|---|
+| **Stressed daily workers** | Functional but struggling — work/family pressure, no diagnosis, high stigma | ✅ Chosen |
+| **People in ongoing therapy** | Under licensed care, have a support system | ❌ Already served |
+| **Serious clinical patients** | Hospitalized or under psychiatric care | ❌ Requires medical license |
+
+**Why stressed daily workers:** Highest reach (1 in 3 US adults experience stress/anxiety without seeking help), most preventable (intervening here stops progression to clinical severity), fully within Google's non-clinical scope. The "social stigma = barrier to seeking help" insight is what makes this segment uniquely underserved despite scale.
+
+**Persona:** 42-year-old tech worker. Post-RTO commute stress, escalation at work pinned on them unfairly, job feels at risk due to AI tools. Can't tell family (don't want to worry them), can't tell colleagues (vulnerability in competitive environment), too proud/busy to see a therapist. Doesn't even know if what they feel "counts" as a mental health issue.
+
+---
+
+### Needs & Challenges
+
+1. **Awareness gap**: "Is what I'm feeling normal? Do I even have a problem?" — stigma prevents seeking info
+2. **Find a solution**: Googling returns 50 apps and Reddit threads — no guidance on what's right for their situation
+3. Skill building — V2
+4. Acute moment support — V2
+5. Record fear ("don't want mental illness on my insurance record") — V2
+
+**Prioritized: Needs 1 & 2** — top-of-funnel, highest reach, no clinical liability, and aligned with V1's riskiest assumption (will people open up to AI?). Needs 3-5 require the V1 assumption to be validated first.
+
+---
+
+### Solutions
+
+**Option 1: Google Mind — AI companion** ✅ Chosen
+Conversational AI powered by Gemini. Listens without judgment, acknowledges, recommends personalized coping strategies, and coaches through exercises in real-time. Leverages 1P cross-surface context (with consent) — if user has been searching "how to deal with a bad boss," the app enters the conversation already warmed.
+
+**Option 2: Google Brain Scanner — wearable** ❌ Killed
+Consumer HW execution is weak; medical hardware requires FDA approval + years of clinical research; any error is PR and legal disaster.
+
+**Option 3: Phone a Friend — volunteer community** ❌ Deferred to V2
+High scammer/bad actor risk; requires thorough background checks; creates liability. Better once the AI companion establishes trust.
+
+---
+
+### MVP — Google Mind
+
+**V1 scope (test riskiest assumption: will people open up to AI about intimate problems, and does it feel human enough to engage with?)**
+
+- Warm, named AI companion — never sounds robotic
+- Entry: "How was your day?" — low-stakes open-ended start
+- Flow: listen → acknowledge → ask one clarifying question → suggest 1-2 options (not prescribe)
+- One coping technique coached interactively (breathing, grounding, reframing)
+- End of session: "How are you feeling now?" — tracks outcome
+- Daily check-in reminder (opt-in)
+
+**Not in V1:** Care routines, progress tracking, community, crisis intervention, health record integration.
+
+---
+
+### Metrics
+
+**NSM: % of weekly users completing a 10min+ session with 3+ AI exchanges**
+Why: 10min + 3 exchanges = meaningful dialogue. If unhelpful or robotic, users disengage in under 2 minutes. Captures both habit formation AND depth of engagement in one metric.
+
+**Input metrics:** Sessions/user/week, avg session length, % sessions where user rates feeling better after, WoW retention.
+
+**Guardrails (non-negotiable for mental health):**
+- % sessions escalated to emergency resources (988 Lifeline) — 0% means escalation path isn't working
+- % sessions rated "made me feel worse" — any upward trend is a product safety signal
+- Hard rule: self-harm / suicidal ideation keywords → immediately surface crisis resources, pause AI conversation
+
+**Bias:**
+- **Reporting bias**: Users who feel better rate sessions; users who felt worse silently churn. Fix: prompt session rating immediately after every session
+- **Demographic skew**: Early adopters will be tech-comfortable, English-speaking, younger. Metrics overstate PMF for this group. Fix: segment all metrics by age cohort and device type from day one
+
+---
+
+### Imagine
+
+"Imagine a 42-year-old tech manager. His team just got an AI tool that automates 40% of their work. His VP blamed the missed quarter on him in front of the whole org. He's been sitting in his car for 20 minutes unable to go home.
+
+He opens Google Mind. A warm voice: 'Hey Arpit, good to see you. How was your day?' He starts talking. The AI already knows from his Search history he's been researching 'how to handle unfair blame at work.' It doesn't start with meditation. It asks: 'That sounds really hard — what's the part that's sitting with you the most?'
+
+Twenty minutes later, he's done a 4-7-8 breathing exercise he didn't know existed, he has three things he can say to his VP tomorrow, and he feels, for the first time today, like he's not completely alone.
+
+That's what organizing information and making it universally accessible looks like for mental health."
+
+---
+
+### L6 Altitude Moves
+
+- **Spectrum-based segmentation with explicit kill rationale**: clinical and ongoing-therapy users already have systems; stressed daily workers are the prevention opportunity with no clinical liability
+- **Riskiest assumption identified, V1 scoped to test it**: "will people open up to AI about intimate problems?" — V1 proves/disproves this before building V2 complexity
+- **NSM measures meaningful engagement not vanity**: 10min + 3 exchanges filters for depth, not opens
+- **Mental health guardrails are non-negotiable**: crisis escalation + "made me feel worse" rate + hard self-harm keyword rule
+- **Imagine close**: specific person, specific emotional arc, all product bets visible in one scene
