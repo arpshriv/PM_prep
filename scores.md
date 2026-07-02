@@ -114,3 +114,9 @@ Score: Product Motivation: 3.5/4, Target Audience: 4/4, Problem Identification: 
 Overall: Solid Pass — 3.6/4 (highest PS score)
 Key feedback: Best segmentation across all PS answers — spectrum-based (severity), killed clinical/ongoing-therapy segments with clear reasons (medical license, already served), chose stressed daily workers as the prevention play. Macro trends specific and current (RTO, AI job insecurity). "Imagine" close was best yet — specific person, emotional arc, all product bets in one scene. NSM fix sharp: 10min+ with 3+ exchanges = meaningful dialogue not just app opens. Gaps: Weakness section had factual error (Transformers didn't fail — Google's weakness is consumer HW application, not the tech itself); need prioritization criteria not made explicit ("why 1&2 over 3&4?"); guardrails missing entirely on first pass — mental health is the one domain where crisis escalation + "made me feel worse" rate are non-negotiable. See solved-product-sense.md Q4.
 ---
+## 2026-07-02 — Google — Strategy — Meta 10-Year Plan (CEO)
+Question: "Suppose you're the CEO of Meta. What would your 10-year plan look like?"
+Score: Thesis Clarity: 4/4, Market Knowledge: 3/4, Trade-off Reasoning: 3/4, Google/Meta Fit: 4/4, Sizing: 1/4
+Overall: Borderline (Pass at L5, Borderline at L6)
+Key feedback: Strong platform thesis and real product depth; no sizing anywhere — must add back-of-envelope on at least one bet; missing explicit "what I'm NOT doing" framing.
+---
